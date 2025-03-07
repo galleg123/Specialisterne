@@ -1,0 +1,35 @@
+Scoreboard
+- Bruger id.
+- Antal forsøg brugt
+- Antal hints brugt
+- Indsættes i JSON, Evt seperat python program der læser igennem JSON filen og præsentere highscores derfra.
+
+
+Bruger ID:
+- Indtast Navn efter succesfuldt mastermind spil
+
+
+Hint system?
+- Giv farven på en tilfældig plads.
+- Hold styr på hvilke pladser farve allerede er givet for.
+
+
+
+
+JSON format:
+
+{
+	"Spiller Navn":{
+		"Spil":{
+			"#Spilnr#":{
+				"Score": ###,
+				"Hints": ###,
+			},
+
+		},
+		"Gennemsnitlig score": ###,
+		"Gennemsnitlig hints": ###,
+		"Antal spil": ###,
+		
+	},
+}

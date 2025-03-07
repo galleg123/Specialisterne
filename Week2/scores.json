@@ -1,0 +1,14 @@
+{
+    "games": [
+        {
+            "name": "Mikkel2",
+            "guesses": "9",
+            "succesful": "True"
+        },
+        {
+            "name": "Mikkel",
+            "guesses": "8",
+            "succesful": "True"
+        }
+    ]
+}
