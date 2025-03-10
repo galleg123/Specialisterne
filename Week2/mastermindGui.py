@@ -11,7 +11,7 @@ class CircleWidget(QWidget):
     def __init__(self, color=QColor(255,255,255)):
         super().__init__()
         self.color = color
-        self.setFixedSize(15,15)
+        self.setFixedSize(25,25)
 
     def set_color(self, color):
         self.color = color
