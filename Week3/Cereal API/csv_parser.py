@@ -12,6 +12,7 @@ def createTable():
     # Create table
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS cereal(
+                   id INTEGER PRIMARY KEY AUTOINCREMENT,
                    name TEXT, 
                    mfr TEXT, 
                    type TEXT, 
@@ -61,11 +62,10 @@ def insertData(data):
     conn = sqlite3.connect('cereal.db')
     cursor = conn.cursor()
     for row in data:
-        columns = ', '.join(row.keys())
-
-        # Placeholder to prevent sql injection by treating input as literal strings
-        placeholders = ', '.join(['?'] * len(row))
-        values = tuple(row.values())
+        # Exclude 'id' from columns and values
+        columns = ', '.join([key for key in row.keys() if key != 'id'])
+        placeholders = ', '.join(['?'] * (len(row)))
+        values = tuple(value for key, value in row.items() if key != 'id')
 
         # Insert the data into the table
         cursor.execute(f"INSERT INTO cereal ({columns}) VALUES ({placeholders})", values)

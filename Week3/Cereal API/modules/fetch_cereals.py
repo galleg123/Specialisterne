@@ -1,8 +1,8 @@
 from flask import jsonify
-from get_db_connection import get_db_connection
+from modules.get_db_connection import get_db_connection
 
 
-def get_cereals(conditions, values):
+def fetch_cereals(conditions, values):
     # The initial query, that will be sent if no additinol conditions are passed
     query = "SELECT * FROM cereal"
     
