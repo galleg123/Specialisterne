@@ -65,7 +65,14 @@ def insertData(data):
         # Exclude 'id' from columns and values
         columns = ', '.join([key for key in row.keys() if key != 'id'])
         placeholders = ', '.join(['?'] * (len(row)))
-        values = tuple(value for key, value in row.items() if key != 'id')
+        values = list(value for key, value in row.items() if key != 'id')
+        
+        # Remove the '.' from the rating value
+        values[-1] = values[-1].replace('.','')
+        print(values)
+        
+        # Convert values to a tuple
+        values = tuple(values)
 
         # Insert the data into the table
         cursor.execute(f"INSERT INTO cereal ({columns}) VALUES ({placeholders})", values)
