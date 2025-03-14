@@ -1,14 +1,15 @@
 from flask import Flask, request, jsonify
+from flasgger import Swagger
 import sqlite3
 from modules.fetch_cereals import fetch_cereals
 from modules.insert_cereal import insert_cereal
 from modules.update_cereal import update_cereal
 from modules.remove_cereal import remove_cereal
 from modules.validate_login import validate_login
-
+from modules.send_image import send_image
 
 app = Flask(__name__)
-
+Swagger(app, template_file='swagger.yaml')
 
 # Get all cereals or filter by query parameters
 @app.route('/cereal', methods = ['GET'])
@@ -44,7 +45,7 @@ def post_cereal():
     data = request.json
 
     if not validate_login(request.headers['Authorization']):
-        return jsonify({'message': 'Bearer token missing or invalid'}), 401 # Return 401 Unauthorized if token is missing or invalid
+        return jsonify({'Error': 'Bearer token missing or invalid'}), 401 # Return 401 Unauthorized if token is missing or invalid
 
     # Exclude 'id' from columns and values
     columns = ', '.join([key for key in data.keys() if key != 'id'])
@@ -65,7 +66,7 @@ def put_cereal(id):
 
     # Validate bearer token
     if not validate_login(request.headers['Authorization']):
-        return jsonify({'message': 'Bearer token missing or invalid'}), 401 # Return 401 Unauthorized if token is missing or invalid
+        return jsonify({'Error': 'Bearer token missing or invalid'}), 401 # Return 401 Unauthorized if token is missing or invalid
 
     # Include 'id' in the columns and values
     columns = ', '.join([f"{key} = ?" for key in data.keys()])
@@ -83,7 +84,7 @@ def put_cereal(id):
 def delete_cereal(id):
     # Validate bearer token
     if not validate_login(request.headers['Authorization']):
-        return jsonify({'message': 'Bearer token missing or invalid'}), 401 # Return 401 Unauthorized if token is missing or invalid
+        return jsonify({'Error': 'Bearer token missing or invalid'}), 401 # Return 401 Unauthorized if token is missing or invalid
     
     return remove_cereal(id)
 
@@ -98,9 +99,14 @@ def login():
     if data['username'] == 'admin' and data['password'] == 'password':
         # Return a bearer token
         return jsonify({'message': 'Login successful',
-                        'bearer_token': 'random_bearer_token'})
+                        'bearer_token': 'random_bearer_token'}), 200
     else:
-        return jsonify({'message': 'Login failed'})
+        return jsonify({'Error': 'Login failed'}), 401
+    
+@app.route('/image/<int:id>', methods = ['GET'])
+def get_image(id):
+
+    return send_image(id)
     
 if __name__ == "__main__":
     app.run(debug=True)

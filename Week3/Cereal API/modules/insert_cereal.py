@@ -18,4 +18,4 @@ def insert_cereal(columns, placeholders, values):
         return jsonify({"message": "success"}), 201
     except Exception as e:
         logging.error(f"Error inserting cereal: {e}")
-        return make_response(jsonify({"message": "error", "details": str(e)}), 500)
+        return make_response(jsonify({"message": "error", "details": "Invalid or missing cereal parameters"}),400)

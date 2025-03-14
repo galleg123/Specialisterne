@@ -19,4 +19,4 @@ def update_cereal(columns, values):
         return jsonify({"message": "success"})
     except Exception as e:
         logging.error(f"Error updating cereal: {e}")
-        return make_response(jsonify({"message": "error", "details": str(e)}), 500)
+        return make_response(jsonify({"message": "error", "details": "Invalid parameter given"}), 400)

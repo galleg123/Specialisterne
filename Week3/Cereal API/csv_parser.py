@@ -14,7 +14,7 @@ def createTable():
     CREATE TABLE IF NOT EXISTS cereal(
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                    name TEXT, 
-                   mfr TEXT, 
+                   manufacturer TEXT, 
                    type TEXT, 
                    calories INTEGER, 
                    protein INTEGER, 
@@ -23,7 +23,7 @@ def createTable():
                    fiber REAL, 
                    carbo REAL, 
                    sugars INTEGER, 
-                   potass INTEGER, 
+                   potassium INTEGER, 
                    vitamins INTEGER, 
                    shelf INTEGER, 
                    weight REAL, 

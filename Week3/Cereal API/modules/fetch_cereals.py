@@ -18,7 +18,7 @@ def fetch_cereals(conditions, values):
     try:
         cursor.execute(query, values)
     except:
-        return jsonify({"Error": "Invalid argument"})
+        return jsonify({"Error": "Invalid argument"}), 400
 
     # Fetch matching rows 
     rows = cursor.fetchall()
@@ -29,4 +29,4 @@ def fetch_cereals(conditions, values):
     # Close database connection
     conn.close()
 
-    return jsonify(result)
+    return jsonify(result), 200

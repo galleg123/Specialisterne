@@ -12,7 +12,7 @@ def remove_cereal(id):
     # Check if any rows were affected
     if cursor.rowcount == 0:
         conn.close()
-        return make_response(jsonify({"message": "Cereal not found"}), 404)
+        return make_response(jsonify({"Error": "Cereal not found"}), 404)
 
     conn.close()
-    return jsonify({"message": "Cereal deleted successfully"})
+    return jsonify({"message": "Cereal deleted successfully"}), 200
