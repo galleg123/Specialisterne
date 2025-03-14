@@ -1,4 +1,6 @@
-# Cereal API
+# Cereal API - OUTDATED!
+
+For the up to date version go to [github.com/galleg123/cereal_api](https://github.com/galleg123/Cereal-API)
 
 The project contains two main functionalities. 
 One being the parsing of a csv into a sqlite database.
