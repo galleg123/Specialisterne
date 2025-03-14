@@ -1,10 +1,11 @@
 import sqlite3
 import csv
+from modules.get_db_connection import get_db_connection
 
 def createTable():
 
     # Connect to the sql database (or create if it doesn't exist)
-    conn = sqlite3.connect('cereal.db')
+    conn = get_db_connection()
 
     # Cursor object for interacting with the sql connection
     cursor = conn.cursor()
