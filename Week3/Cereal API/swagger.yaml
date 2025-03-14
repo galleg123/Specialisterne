@@ -1,0 +1,372 @@
+swagger: '2.0'
+info:
+  title: 'API Documentation for Cereal API'
+  description: 'This is the API documentation for the Cereal API'
+  version: '1.0.0'
+paths:
+  /cereal:
+    get:
+      summary: 'This endpoint returns either all cereals or cereals that match the query parameters.'    
+      parameters:
+        - in: query
+          name: id
+          type: integer
+          description: 'The database id of the cereal'
+        - in: query
+          name: name
+          type: string
+          description: 'The name of the cereal'
+        - in: query
+          name: manufacturer
+          type: string
+          description: 'The manufacturer of the cereal, either: A, G, K, N, P, Q or R'
+        - in: query
+          name: calories
+          type: integer
+          description: 'The number of calories in the cereal'
+        - in: query
+          name: protein
+          type: integer
+          description: 'The amount of protein in the cereal'
+        - in: query
+          name: fat
+          type: integer
+          description: 'The amount of fat in the cereal'
+        - in: query
+          name: sodium
+          type: integer
+          description: 'The amount of sodium in the cereal'
+        - in: query
+          name: fiber
+          type: number
+          description: 'The amount of fiber in the cereal'
+        - in: query
+          name: carbo
+          type: number
+          description: 'The amount of carbohydrates in the cereal'
+        - in: query
+          name: sugars
+          type: integer
+          description: 'The amount of sugar in the cereal'
+        - in: query
+          name: potassium
+          type: integer
+          description: 'The amount of potassium in the cereal'
+        - in: query
+          name: vitamins
+          type: string
+          description: 'The vitamins in the cereal'
+        - in: query
+          name: shelf
+          type: integer
+          description: 'The shelf the cereal is on'
+        - in: query
+          name: weight
+          type: number
+          description: 'The weight of the cereal'
+        - in: query
+          name: cups
+          type: number
+          description: 'The number of cups in the cereal'
+        - in: query
+          name: rating
+          type: number
+          description: 'The rating of the cereal'
+      responses:
+        200:
+          description: A list of cereals
+          schema:
+            type: array
+            items: 
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                manufacturer:
+                  type: string
+                calories:
+                  type: integer
+                protein:
+                  type: integer
+                fat:
+                    type: integer
+                sodium:
+                  type: integer
+                fiber:
+                  type: number
+                carbo:
+                  type: number
+                sugars:
+                  type: integer
+                potassium:
+                  type: integer
+                vitamins:
+                  type: string
+                shelf:
+                  type: integer
+                weight:
+                  type: number
+                cups:
+                  type: number
+                rating:
+                  type: number
+      400:
+        description: Invalid argument
+        schema:
+          type: object
+          properties:
+            Error: 
+              type: string
+    post:
+      summary: 'This endpoint adds a new cereal to the database.'
+      parameters:
+        - in: body
+          name: cereal
+          description: 'The cereal to add to the database'
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              manufacturer:
+                type: string
+              calories:
+                type: integer
+              protein:
+                type: integer
+              fat:
+                type: integer
+              sodium:
+                type: integer
+              fiber:
+                type: number
+              carbo:
+                type: number
+              sugars:
+                type: integer
+              potassium:
+                type: integer
+              vitamins:
+                type: string
+              shelf:
+                type: integer
+              weight:
+                type: number
+              cups:
+                type: number
+              rating:
+                type: number
+        - in: header
+          name: Authorization
+          type: string
+          description: 'The autorization token, dummy token is "Bearer random_bearer_token"'
+      responses:
+        201:
+          description: Cereal added
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+        401:
+          description: Unauthorized
+          schema:
+            type: object
+            properties:
+              Error:
+                type: string
+  /cereal/{id}:
+    get:
+      summary: 'This endpoint returns the cereal with the given id.'
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          description: 'The database id of the cereal'
+      responses:
+        200:
+          description: The cereal
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              manufacturer:
+                type: string
+              calories:
+                type: integer
+              protein:
+                type: integer
+              fat:
+                type: integer
+              sodium:
+                type: integer
+              fiber:
+                type: number
+              carbo:
+                type: number
+              sugars:
+                type: integer
+              potassium:
+                type: integer
+              vitamins:
+                type: string
+              shelf:
+                type: integer
+              weight:
+                type: number
+              cups:
+                type: number
+              rating:
+                type: number
+        404:
+          description: Cereal not found
+          schema:
+            type: object
+            properties:
+              Error:
+                type: string
+    put:
+      summary: 'This endpoint updates the cereal with the given id.'
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          description: 'The database id of the cereal'
+        - in: body
+          name: cereal
+          description: 'The cereal to update in the database'
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              manufacturer:
+                type: string
+              calories:
+                type: integer
+              protein:
+                type: integer
+              fat:
+                type: integer
+              sodium:
+                type: integer
+              fiber:
+                type: number
+              carbo:
+                type: number
+              sugars:
+                type: integer
+              potassium:
+                type: integer
+              vitamins:
+                type: string
+              shelf:
+                type: integer
+              weight:
+                type: number
+              cups:
+                type: number
+              rating:
+                type: number
+        - in: header
+          name: Authorization
+          type: string
+          description: 'The autorization token, dummy token is "Bearer random_bearer_token"'
+      responses:
+        200:
+          description: Cereal updated
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+        400:
+          description: Invalid parameters
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              details:
+                type: string
+    delete:
+      summary: Delete the Cereal with the given ID from the database
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          description: The ID of the cereal that is to be deleted.
+        - in: header
+          name: Authorization
+          type: string
+          description: 'The autorization token, dummy token is "Bearer random_bearer_token"'
+      responses:
+        200:
+          description: Cereal deleted
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+        404:
+          description: Cereal not found
+          schema:
+            type: object
+            properties:
+              Error:
+                type: string
+  /login:
+    post:
+      summary: 'This endpoint returns a token if the user is authenticated.'
+      parameters:
+        - in: body
+          name: username
+          type: string
+          description: 'The username for account (dummy username is "admin")'
+        - in: body
+          name: password
+          type: string
+          description: 'The password for account (dummy password is "password")'
+      responses:
+        200:
+          description: Token returned
+          schema:
+            type: object
+            properties:
+              bearer_token:
+                type: string
+        401:
+          description: Unauthorized
+          schema:
+            type: object
+            properties:
+              Error:
+                type: string
+  /images/{id}:
+    get:
+      summary: 'This endpoint returns the image of the cereal with the given id.'
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          description: 'The database id of the cereal'
+      responses:
+        200:
+          description: The cereal image
+          schema:
+            type: object
+            properties:
+              image:
+                type: string
+        404:
+          description: Image not found
+          schema:
+            type: object
+            properties:
+              Error:
+                type: string
